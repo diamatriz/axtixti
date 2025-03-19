@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axti-Xti</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Подключение шрифтов -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Видео на фон -->
+  <div class="video-background">
+    <video autoplay muted loop>
+      <source src="output.webm" type="video/webm">
+      Ваш браузер не поддерживает видео.
+    </video>
+  </div>
+
+  <!-- Основной контент -->
+  <header>
+    <h1>Axti-Xti</h1>
+  </header>
+  <nav>
+    <div class="nav-links">
+      <a href="#about">О группе</a>
+      <a href="#releases">Релизы</a>
+      <a href="#shows">Концерты</a>
+      <a href="#contact">Контакты</a>
+    </div>
+    <button id="auth-button">Войти</button>
+  </nav>
+  <section id="about">
+    <h2>О группе</h2>
+    <p>Axti-Xti — это экспериментальный музыкальный проект, создающий мрачные и хаотичные звуковые ландшафты.</p>
+  </section>
+  <section id="releases">
+    <h2>Релизы</h2>
+    <p>Здесь будут ваши релизы.</p>
+  </section>
+  <section id="shows">
+    <h2>Концерты</h2>
+    <p>Следите за обновлениями, чтобы узнать о предстоящих концертах.</p>
+  </section>
+  <section id="contact">
+    <h2>Контакты</h2>
+    <p>Свяжитесь с нами: <a href="mailto:axtixti@gmail.com">info@axti-xti.com</a></p>
+  </section>
+  <footer>
+    <p>&copy; 2023 Axti-Xti. Все права защищены.</p>
+  </footer>
+
+  <!-- Всплывающее окно для входа/регистрации -->
+  <div id="auth-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="login-form">
+        <h2>Вход</h2>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Пароль">
+        <button id="login-button">Войти</button>
+        <p>Нет аккаунта? <a href="#" id="show-register">Зарегистрируйтесь</a></p>
+      </div>
+      <div id="register-form" style="display: none;">
+        <h2>Регистрация</h2>
+        <input type="email" id="register-email" placeholder="Email">
+        <input type="password" id="register-password" placeholder="Пароль">
+        <button id="register-button">Зарегистрироваться</button>
+        <p>Уже есть аккаунт? <a href="#" id="show-login">Войдите</a></p>
+      </div>
+      <div id="auth-error" style="color: red; display: none;"></div>
+    </div>
+  </div>
+
+  <!-- Кнопка "Наверх" -->
+  <button id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Наверх</button>
+
+  <!-- Кнопка выхода -->
+  <button id="logout-button" style="display: none;">Выйти</button>
+
+  <!-- Подключение Firebase и скриптов -->
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
