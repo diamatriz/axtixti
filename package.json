@@ -1,0 +1,25 @@
+{
+  "name": "axtixti",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+"lint": "eslint --ext .js,.ts ."
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diamatriz/axtixti.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diamatriz/axtixti/issues"
+  },
+  "homepage": "https://github.com/diamatriz/axtixti#readme",
+  "dependencies": {
+    "firebase-admin": "^13.2.0",
+    "firebase-functions": "^6.3.2"
+  }
+}

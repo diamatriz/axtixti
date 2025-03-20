@@ -1,127 +1,131 @@
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import { 
+  getDatabase, 
+  ref, 
+  push, 
+  onValue 
+} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-database.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBbgXCs2uiGVU0kCrBB90f6xnPAwbsRLGE",
-    authDomain: "axti-xti.firebaseapp.com",
-    projectId: "axti-xti",
-    storageBucket: "axti-xti.firebasestorage.app",
-    messagingSenderId: "404760789020",
-    appId: "1:404760789020:web:a06665cf903e5099981fd9",
-    measurementId: "G-46PPLM5840"
-  };
+// Конфигурация Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyBbgXCs2uiGVU0kCrBB90f6xnPAwbsRLGE",
+  authDomain: "axti-xti.firebaseapp.com",
+  projectId: "axti-xti",
+  storageBucket: "axti-xti.appspot.com",
+  messagingSenderId: "404760789020",
+  appId: "1:404760789020:web:a06665cf903e5099981fd9",
+  measurementId: "G-46PPLM5840"
+};
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+// Инициализация Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
-// Элементы DOM
-const authButton = document.getElementById('auth-button');
-const authModal = document.getElementById('auth-modal');
-const closeModal = document.querySelector('.close');
-const loginForm = document.getElementById('login-form');
-const registerForm = document.getElementById('register-form');
-const loginEmail = document.getElementById('login-email');
-const loginPassword = document.getElementById('login-password');
-const registerEmail = document.getElementById('register-email');
-const registerPassword = document.getElementById('register-password');
-const loginButton = document.getElementById('login-button');
-const registerButton = document.getElementById('register-button');
-const showRegister = document.getElementById('show-register');
-const showLogin = document.getElementById('show-login');
-const logoutButton = document.getElementById('logout-button');
-const authError = document.getElementById('auth-error');
-const scrollTopButton = document.getElementById('scroll-top');
+// Элементы DOM для чата
+const nicknameInput = document.getElementById('nickname');
+const chatBox = document.getElementById('chat-box');
+const messageInput = document.getElementById('message-input');
+const sendButton = document.getElementById('send-button');
 
-// Открытие модального окна
-authButton.addEventListener('click', () => {
-  authModal.style.display = 'flex';
+// Переменная для хранения никнейма
+let nickname = '';
+
+// Обработчик ввода никнейма
+nicknameInput.addEventListener('input', (e) => {
+  nickname = e.target.value.trim();
 });
 
-// Закрытие модального окна
-closeModal.addEventListener('click', () => {
-  authModal.style.display = 'none';
-});
+// Обработчик отправки сообщения
+sendButton.addEventListener('click', () => {
+  const message = messageInput.value.trim();
+  if (message === '' || nickname === '') {
+    alert('Введите никнейм и сообщение!');
+    return;
+  }
 
-// Переключение между формами
-showRegister.addEventListener('click', (e) => {
-  e.preventDefault();
-  loginForm.style.display = 'none';
-  registerForm.style.display = 'block';
-});
-
-showLogin.addEventListener('click', (e) => {
-  e.preventDefault();
-  registerForm.style.display = 'none';
-  loginForm.style.display = 'block';
-});
-
-// Регистрация
-registerButton.addEventListener('click', () => {
-  const email = registerEmail.value;
-  const password = registerPassword.value;
-
-  auth.createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      authError.style.display = 'none';
-      alert('Регистрация успешна!');
-      authModal.style.display = 'none';
-    })
-    .catch((error) => {
-      authError.textContent = error.message;
-      authError.style.display = 'block';
-    });
-});
-
-// Вход
-loginButton.addEventListener('click', () => {
-  const email = loginEmail.value;
-  const password = loginPassword.value;
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-      authError.style.display = 'none';
-      alert('Вход выполнен!');
-      authModal.style.display = 'none';
-    })
-    .catch((error) => {
-      authError.textContent = error.message;
-      authError.style.display = 'block';
-    });
-});
-
-// Выход
-logoutButton.addEventListener('click', () => {
-  auth.signOut().then(() => {
-    alert('Вы вышли из системы.');
+  // Отправляем сообщение в Firebase
+  const chatRef = ref(database, 'chat');
+  push(chatRef, {
+    user: nickname,
+    text: message,
+    timestamp: Date.now()
   });
+
+  // Очищаем поле ввода сообщения
+  messageInput.value = '';
 });
 
-// Отслеживание состояния аутентификации
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    // Пользователь авторизован
-    authButton.style.display = 'none';
-    logoutButton.style.display = 'block';
-  } else {
-    // Пользователь не авторизован
-    authButton.style.display = 'block';
-    logoutButton.style.display = 'none';
-  }
-});
+// Загрузка и отображение сообщений
+function loadChatMessages() {
+  const chatRef = ref(database, 'chat');
+  onValue(chatRef, (snapshot) => {
+    chatBox.innerHTML = ''; // Очищаем чат перед обновлением
+    snapshot.forEach((childSnapshot) => {
+      const message = childSnapshot.val();
+      const messageElement = document.createElement('p');
+      messageElement.textContent = `${message.user}: ${message.text}`;
+      chatBox.appendChild(messageElement);
+    });
 
-// Показ кнопки "Наверх" при прокрутке
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    scrollTopButton.style.display = 'block';
-  } else {
-    scrollTopButton.style.display = 'none';
-  }
+    // Прокручиваем чат вниз
+    chatBox.scrollTop = chatBox.scrollHeight;
+  });
+}
+
+// Загружаем сообщения при загрузке страницы
+loadChatMessages();
+
+const showGrid = document.getElementById('show-grid');
+const posters = [];
+
+for (let i = 1; i <= 16; i++) {
+  posters.push(`photos/photo${i}.jpg`);
+}
+
+posters.sort(() => Math.random() - 0.5);
+posters.forEach(poster => {
+  const posterItem = document.createElement('div');
+  posterItem.classList.add('show-item');
+  posterItem.innerHTML = `<img src="${poster}" alt="Афиша">`;
+  showGrid.appendChild(posterItem);
 });
+const headerTitle = document.querySelector('header h1');
+
+// Список шрифтов для рандомного выбора
+const fonts = [
+  'Black Ops One, cursive',
+  'UnifrakturMaguntia, cursive',
+  'Roboto Mono, monospace',
+  'Arial, sans-serif',
+  'Courier New, monospace'
+];
+
+// Список цветов для рандомного выбора
+const colors = [
+  '#ff0000', // Красный
+  '#00ff00', // Зеленый
+  '#0000ff', // Синий
+  '#ffff00', // Желтый
+  '#ff00ff', // Пурпурный
+  '#00ffff'  // Голубой
+];
+
+// Функция для рандомного изменения стилей
+function randomizeTitle() {
+  // Рандомный шрифт
+  const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+  // Рандомный цвет
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  // Рандомный текст (например, замена символов)
+  const randomText = 'Axti-Xti'.split('').map(char => {
+    return Math.random() > 0.5 ? char : String.fromCharCode(Math.floor(Math.random() * 94) + 32);
+  }).join('');
+
+  // Применяем изменения
+  headerTitle.style.fontFamily = randomFont;
+  headerTitle.style.color = randomColor;
+  headerTitle.textContent = randomText;
+}
+
+// Запускаем анимацию каждые 2 секунды
+setInterval(randomizeTitle, 2000);

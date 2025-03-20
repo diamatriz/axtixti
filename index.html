@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Axti-Xti</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Подключение шрифтов -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&family=UnifrakturMaguntia&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 </head>
 <body>
   <!-- Видео на фон -->
   <div class="video-background">
     <video autoplay muted loop>
-      <source src="output.webm" type="video/webm">
+      <source src="output.webm" type="video/mp4">
       Ваш браузер не поддерживает видео.
     </video>
   </div>
@@ -27,60 +28,142 @@
       <a href="#releases">Релизы</a>
       <a href="#shows">Концерты</a>
       <a href="#contact">Контакты</a>
+      <a href="#chat">Чат</a>
     </div>
-    <button id="auth-button">Войти</button>
   </nav>
+
+  <!-- О группе -->
   <section id="about">
     <h2>О группе</h2>
-    <p>Axti-Xti — это экспериментальный музыкальный проект, создающий мрачные и хаотичные звуковые ландшафты.</p>
+    <p>Axti-xti — электро-нойз-команда из Перми в составе: Тимур — на вокале, Данил — на ударных, и Женя — за пультом. Под влиянием местной андеграундной культуры, атмосферы промышленного города и мистической уральской энергии группа воплощает свой жизненный выбор в семплировании, волнах преувеличенного шума, барабанной дроби и перегруженном голосе.</p>
   </section>
+
   <section id="releases">
     <h2>Релизы</h2>
-    <p>Здесь будут ваши релизы.</p>
+    <div class="release-grid">
+      <!-- Аптека -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=2875574963/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/--8">Аптека by Axti-xti</a></iframe>
+      </div>
+      <!-- Основы ножевого боя Remixes by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=2815117716/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/remixes">Основы ножевого боя Remixes by Axti-xti</a></iframe>
+      </div>
+      <!-- Вживую @ Обычная галерея by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=673295955/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/--7">Вживую @ Обычная галерея by Axti-xti</a></iframe>
+      </div>
+      <!-- Вериги by Axti-xti, Узница Совести -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=3822946170/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/--6">Вериги by Axti-xti, Узница Совести</a></iframe>
+      </div>
+      <!-- Попробуй чем-нибудь сняться by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=1739533838/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/--5">Попробуй чем-нибудь сняться by Axti-xti</a></iframe>
+      </div>
+      <!-- Вселенский собор by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=3841542184/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/--4">Вселенский собор by Axti-xti</a></iframe>
+      </div>
+      <!-- Музыка для танцев (RE-MIXED) by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=3905639076/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/re-mixed">Музыка для танцев (RE-MIXED) by Axti-xti</a></iframe>
+      </div>
+      <!-- Город Пермь by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=2870844002/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/--3">Город Пермь by Axti-xti</a></iframe>
+      </div>
+      <!-- Да by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 442px;" src="https://bandcamp.com/EmbeddedPlayer/track=2322998066/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/track/--22">Да by Axti-xti</a></iframe>
+      </div>
+      <!-- Знак налицо by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=2724301580/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/--2">Знак налицо by Axti-xti</a></iframe>
+      </div>
+      <!-- Кастор / Шамиль by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=1352573240/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/-">Кастор / Шамиль by Axti-xti</a></iframe>
+      </div>
+      <!-- Axti-xti by Axti-xti -->
+      <div class="release-item">
+        <iframe style="border: 0; width: 350px; height: 470px;" src="https://bandcamp.com/EmbeddedPlayer/album=4051840592/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/transparent=true/" seamless><a href="https://axti-xti.bandcamp.com/album/axti-xti">Axti-xti by Axti-xti</a></iframe>
+      </div>
+    </div>
   </section>
+
+  <!-- Концерты -->
   <section id="shows">
     <h2>Концерты</h2>
-    <p>Следите за обновлениями, чтобы узнать о предстоящих концертах.</p>
+    <div class="show-grid" id="show-grid">
+      <!-- Афиши будут добавлены через JavaScript -->
+    </div>
   </section>
+
+  <!-- Контакты -->
   <section id="contact">
-    <h2>Контакты</h2>
-    <p>Свяжитесь с нами: <a href="mailto:axtixti@gmail.com">info@axti-xti.com</a></p>
+    <h2>СВЯЗЬ</h2>
+    <div class="social-links">
+      <a href="https://www.instagram.com/axtixti/" target="_blank" class="social-button">
+        <img src="icons/instagram.svg" alt="Instagram" class="social-icon">
+        Instagram
+      </a>
+      <a href="https://t.me/axtixti" target="_blank" class="social-button">
+        <img src="icons/telegram.svg" alt="Telegram" class="social-icon">
+        Telegram
+      </a>
+      <a href="https://www.youtube.com/channel/UCq0hYIGNo6ZkconFVyz3lzg" target="_blank" class="social-button">
+        <img src="icons/youtube.svg" alt="YouTube" class="social-icon">
+        YouTube
+      </a>
+      <a href="https://vk.com/axtixti" target="_blank" class="social-button">
+        <img src="icons/vk.svg" alt="VK" class="social-icon">
+        ВКонтакте
+      </a>
+      <a href="https://band.link/axti_xti" target="_blank" class="social-button">
+        <img src="icons/link.svg" alt="BandLink" class="social-icon">
+        BandLink
+      </a>
+      <a href="https://axti-xti.bandcamp.com/" target="_blank" class="social-button">
+        <img src="icons/bandcamp.svg" alt="Bandcamp" class="social-icon">
+        Bandcamp
+      </a>
+      <a href="https://music.yandex.ru/artist/9677192" target="_blank" class="social-button">
+        <img src="icons/yandex-music.svg" alt="Яндекс.Музыка" class="social-icon">
+        Яндекс.Музыка
+      </a>
+    </div>
   </section>
+  <!-- Чат -->
+  <section id="chat">
+    <h2>Чат</h2>
+    <div class="chat-container">
+      <div class="nickname-input">
+        <label for="nickname">Ваш никнейм:</label>
+        <input type="text" id="nickname" placeholder="Введите ваш никнейм">
+      </div>
+      <div class="chat-box" id="chat-box"></div>
+      <div class="message-input">
+        <input type="text" id="message-input" placeholder="Введите ваше сообщение">
+        <button id="send-button">Отправить</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Подвал -->
   <footer>
-    <p>&copy; 2023 Axti-Xti. Все права защищены.</p>
+    <div class="footer-content">
+      <p>&copy; 2025 Axti-Xti. Все права защищены.</p>
+      <div class="footer-links">
+        <a href="#about">О группе</a>
+        <a href="#releases">Релизы</a>
+        <a href="#shows">Концерты</a>
+        <a href="#contact">Контакты</a>
+      </div>
+    </div>
   </footer>
 
-  <!-- Всплывающее окно для входа/регистрации -->
-  <div id="auth-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div id="login-form">
-        <h2>Вход</h2>
-        <input type="email" id="login-email" placeholder="Email">
-        <input type="password" id="login-password" placeholder="Пароль">
-        <button id="login-button">Войти</button>
-        <p>Нет аккаунта? <a href="#" id="show-register">Зарегистрируйтесь</a></p>
-      </div>
-      <div id="register-form" style="display: none;">
-        <h2>Регистрация</h2>
-        <input type="email" id="register-email" placeholder="Email">
-        <input type="password" id="register-password" placeholder="Пароль">
-        <button id="register-button">Зарегистрироваться</button>
-        <p>Уже есть аккаунт? <a href="#" id="show-login">Войдите</a></p>
-      </div>
-      <div id="auth-error" style="color: red; display: none;"></div>
-    </div>
-  </div>
-
-  <!-- Кнопка "Наверх" -->
-  <button id="scroll-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Наверх</button>
-
-  <!-- Кнопка выхода -->
-  <button id="logout-button" style="display: none;">Выйти</button>
-
   <!-- Подключение Firebase и скриптов -->
-  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js"></script>
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
